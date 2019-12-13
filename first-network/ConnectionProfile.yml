@@ -25,10 +25,10 @@ organizations:
       - peer0.org1.example.com
     certificateAuthorities:
       - ca.example.com
-    #adminPrivateKey:
-    #  path: crypto-config/peerOrganizations/org1.example.com/users/Admin@org1.example.com/msp/keystore/7adba194c3f83948a92db5aa2bd40650fdaf8036cc271f5a5f2ec402e50240b5_sk
-    #signedCert:
-    #  path: crypto-config/peerOrganizations/org1.example.com/users/Admin@org1.example.com/msp/signcerts/Admin@org1.example.com-cert.pem
+    adminPrivateKey:
+      path: crypto-config/peerOrganizations/org1.example.com/users/Admin@org1.example.com/msp/keystore/7adba194c3f83948a92db5aa2bd40650fdaf8036cc271f5a5f2ec402e50240b5_sk
+    signedCert:
+      path: crypto-config/peerOrganizations/org1.example.com/users/Admin@org1.example.com/msp/signcerts/Admin@org1.example.com-cert.pem
 orderers:
   orderer.example.com:
     url: grpc://localhost:7050
