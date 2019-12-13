@@ -1,0 +1,104 @@
+name: "Org1 Client"
+version: "1.0"
+client:
+  organization: Org1
+  credentialStore:
+    path: "./hfc-key-store"
+    cryptoStore:
+      path: "./hfc-key-store"
+channels:
+  mychannel:
+    orderers:
+      - orderer.example.com
+    peers:
+      peer0.org1.example.com:
+        endorsingPeer: true
+        chaincodeQuery: true
+        ledgerQuery: true
+        eventSource: true
+    #chaincodes:
+    #  - minimalcc:v1
+organizations:
+  Org1:
+    mspid: Org1MSP
+    peers:
+      - peer0.org1.example.com
+    certificateAuthorities:
+      - ca.example.com
+    #adminPrivateKey:
+    #  path: crypto-config/peerOrganizations/org1.example.com/users/Admin@org1.example.com/msp/keystore/7adba194c3f83948a92db5aa2bd40650fdaf8036cc271f5a5f2ec402e50240b5_sk
+    #signedCert:
+    #  path: crypto-config/peerOrganizations/org1.example.com/users/Admin@org1.example.com/msp/signcerts/Admin@org1.example.com-cert.pem
+orderers:
+  orderer.example.com:
+    url: grpc://localhost:7050
+    #grpcOptions:
+    #  ssl-target-name-override: orderer.example.com
+    #  grpc-max-send-message-length: 15
+    tlsCACerts:
+      pem: |
+        -----BEGIN CERTIFICATE-----
+        MIICVzCCAf6gAwIBAgIRALSqxnWz20kv0BsqFbYVSKUwCgYIKoZIzj0EAwIwdjEL
+        MAkGA1UEBhMCVVMxEzARBgNVBAgTCkNhbGlmb3JuaWExFjAUBgNVBAcTDVNhbiBG
+        cmFuY2lzY28xGTAXBgNVBAoTEG9yZzEuZXhhbXBsZS5jb20xHzAdBgNVBAMTFnRs
+        c2NhLm9yZzEuZXhhbXBsZS5jb20wHhcNMTkxMjEzMDMxMTAwWhcNMjkxMjEwMDMx
+        MTAwWjB2MQswCQYDVQQGEwJVUzETMBEGA1UECBMKQ2FsaWZvcm5pYTEWMBQGA1UE
+        BxMNU2FuIEZyYW5jaXNjbzEZMBcGA1UEChMQb3JnMS5leGFtcGxlLmNvbTEfMB0G
+        A1UEAxMWdGxzY2Eub3JnMS5leGFtcGxlLmNvbTBZMBMGByqGSM49AgEGCCqGSM49
+        AwEHA0IABNsZh6yBi7goc0k4qaBXaNzfBBhFyShcWiYYqzgvWt981GcFVSpvWEHj
+        S1KBznlLrsP8vYg95ZPO8vKU5YXHSSOjbTBrMA4GA1UdDwEB/wQEAwIBpjAdBgNV
+        HSUEFjAUBggrBgEFBQcDAgYIKwYBBQUHAwEwDwYDVR0TAQH/BAUwAwEB/zApBgNV
+        HQ4EIgQg7FPxXXtds10tcuDH6hCQ4QzZVuxySSX5vTinAKhAWM0wCgYIKoZIzj0E
+        AwIDRwAwRAIgPV6ezpA4d8H5zjijgGNC1bBVeiBLqH5WFLMq3dp0WkoCIB2zsFCr
+        4OyDIl6dTzeBQk1dwFSQNnttyMIwbmq42oY5
+        -----END CERTIFICATE-----
+peers:
+  peer0.org1.example.com:
+    url: grpc://peer0.org1.example.com:7051
+    eventUrl: grpc://peer0.org1.example.com:7053
+    #grpcOptions:
+    #  ssl-target-name-override: peer0.org1.example.com
+    #  grpc.keepalive_time_ms: 600000
+    tlsCACerts:
+      pem: |
+        -----BEGIN CERTIFICATE-----
+        MIICVzCCAf6gAwIBAgIRALSqxnWz20kv0BsqFbYVSKUwCgYIKoZIzj0EAwIwdjEL
+        MAkGA1UEBhMCVVMxEzARBgNVBAgTCkNhbGlmb3JuaWExFjAUBgNVBAcTDVNhbiBG
+        cmFuY2lzY28xGTAXBgNVBAoTEG9yZzEuZXhhbXBsZS5jb20xHzAdBgNVBAMTFnRs
+        c2NhLm9yZzEuZXhhbXBsZS5jb20wHhcNMTkxMjEzMDMxMTAwWhcNMjkxMjEwMDMx
+        MTAwWjB2MQswCQYDVQQGEwJVUzETMBEGA1UECBMKQ2FsaWZvcm5pYTEWMBQGA1UE
+        BxMNU2FuIEZyYW5jaXNjbzEZMBcGA1UEChMQb3JnMS5leGFtcGxlLmNvbTEfMB0G
+        A1UEAxMWdGxzY2Eub3JnMS5leGFtcGxlLmNvbTBZMBMGByqGSM49AgEGCCqGSM49
+        AwEHA0IABNsZh6yBi7goc0k4qaBXaNzfBBhFyShcWiYYqzgvWt981GcFVSpvWEHj
+        S1KBznlLrsP8vYg95ZPO8vKU5YXHSSOjbTBrMA4GA1UdDwEB/wQEAwIBpjAdBgNV
+        HSUEFjAUBggrBgEFBQcDAgYIKwYBBQUHAwEwDwYDVR0TAQH/BAUwAwEB/zApBgNV
+        HQ4EIgQg7FPxXXtds10tcuDH6hCQ4QzZVuxySSX5vTinAKhAWM0wCgYIKoZIzj0E
+        AwIDRwAwRAIgPV6ezpA4d8H5zjijgGNC1bBVeiBLqH5WFLMq3dp0WkoCIB2zsFCr
+        4OyDIl6dTzeBQk1dwFSQNnttyMIwbmq42oY5
+        -----END CERTIFICATE-----
+certificateAuthorities:
+  ca.org1.example.com:
+    url: https://localhost:7054
+    caName: ca-org1
+    httpOptions:
+      verify: false
+      tlsCACerts:
+        pem: |
+          -----BEGIN CERTIFICATE-----
+          MIICVzCCAf6gAwIBAgIRALSqxnWz20kv0BsqFbYVSKUwCgYIKoZIzj0EAwIwdjEL
+          MAkGA1UEBhMCVVMxEzARBgNVBAgTCkNhbGlmb3JuaWExFjAUBgNVBAcTDVNhbiBG
+          cmFuY2lzY28xGTAXBgNVBAoTEG9yZzEuZXhhbXBsZS5jb20xHzAdBgNVBAMTFnRs
+          c2NhLm9yZzEuZXhhbXBsZS5jb20wHhcNMTkxMjEzMDMxMTAwWhcNMjkxMjEwMDMx
+          MTAwWjB2MQswCQYDVQQGEwJVUzETMBEGA1UECBMKQ2FsaWZvcm5pYTEWMBQGA1UE
+          BxMNU2FuIEZyYW5jaXNjbzEZMBcGA1UEChMQb3JnMS5leGFtcGxlLmNvbTEfMB0G
+          A1UEAxMWdGxzY2Eub3JnMS5leGFtcGxlLmNvbTBZMBMGByqGSM49AgEGCCqGSM49
+          AwEHA0IABNsZh6yBi7goc0k4qaBXaNzfBBhFyShcWiYYqzgvWt981GcFVSpvWEHj
+          S1KBznlLrsP8vYg95ZPO8vKU5YXHSSOjbTBrMA4GA1UdDwEB/wQEAwIBpjAdBgNV
+          HSUEFjAUBggrBgEFBQcDAgYIKwYBBQUHAwEwDwYDVR0TAQH/BAUwAwEB/zApBgNV
+          HQ4EIgQg7FPxXXtds10tcuDH6hCQ4QzZVuxySSX5vTinAKhAWM0wCgYIKoZIzj0E
+          AwIDRwAwRAIgPV6ezpA4d8H5zjijgGNC1bBVeiBLqH5WFLMq3dp0WkoCIB2zsFCr
+          4OyDIl6dTzeBQk1dwFSQNnttyMIwbmq42oY5
+          -----END CERTIFICATE-----
+    registrar:
+      - enrollId: admin
+        enrollSecret: adminpw
