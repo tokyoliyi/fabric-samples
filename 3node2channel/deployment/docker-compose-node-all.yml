@@ -28,7 +28,7 @@ services:
             - ../crypto-config/peerOrganizations/org1.example.com/users:/var/hyperledger/users
             - ../channel-artifacts/:/var/hyperledger/configs
         extra_hosts:
-            - "orderer.example.com:192.178.1.245"
+            - "orderer.example.com:192.178.1.137"
             # - "peer0.org2.example.com:192.178.0.109"
             # - "peer0.org3.example.com:192.178.0.109"
         networks:
@@ -60,7 +60,7 @@ services:
             - ../crypto-config/peerOrganizations/org2.example.com/users:/var/hyperledger/users
             - ../channel-artifacts/:/var/hyperledger/configs
         extra_hosts:
-            - "orderer.example.com:192.178.1.245"
+            - "orderer.example.com:192.178.1.137"
             # - "peer0.org1.example.com:192.178.0.109"
             # - "peer0.org3.example.com:192.178.0.109"
         networks:
@@ -93,7 +93,7 @@ services:
                 - ../crypto-config/peerOrganizations/org3.example.com/users:/var/hyperledger/users
                 - ../channel-artifacts/:/var/hyperledger/configs
             extra_hosts:
-              - "orderer.example.com:192.178.1.245"
+              - "orderer.example.com:192.178.1.137"
               # - "peer0.org1.example.com:192.178.0.109"
               # - "peer0.org2.example.com:192.178.0.109"
             networks:
@@ -118,7 +118,7 @@ services:
           - CORE_PEER_MSPCONFIGPATH=/opt/gopath/src/github.com/hyperledger/fabric/peer/crypto/peerOrganizations/org1.example.com/users/Admin@org1.example.com/msp
           - CORE_CHAINCODE_KEEPALIVE=10
         extra_hosts:
-          - "orderer.example.com:192.178.1.245"
+          - "orderer.example.com:192.178.1.137"
         working_dir: /opt/gopath/src/github.com/hyperledger/fabric/peer
         command: /bin/bash
         volumes:
