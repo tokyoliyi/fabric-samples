@@ -38,6 +38,7 @@ services:
         ports:
           - 7051:7051
           - 7053:7053
+
     peer0.org2.example.com:
         extends:
             file: docker-compose-base.yml
@@ -68,41 +69,41 @@ services:
              aliases:
                - net
         ports:
-          - 7051:7051
-          - 7053:7053
+          - 8051:7051
+          - 8053:7053
 
-          peer0.org3.example.com:
-            extends:
-                file: docker-compose-base.yml
-                service: peer
-            container_name: peer0.org3.example.com
-            environment:
-                - CORE_PEER_CHAINCODELISTENADDRESS=peer0.org3.example.com:9052
-                - CORE_PEER_ID=peer0.org3.example.com
-                - CORE_PEER_ADDRESS=peer0.org3.example.com:9051
-                - CORE_PEER_GOSSIP_BOOTSTRAP=peer0.org1.example.com:7051
-                - CORE_PEER_GOSSIP_ORGLEADER=false
-                - CORE_PEER_GOSSIP_USELEADERELECTION=true
-                - CORE_PEER_LOCALMSPID=Org3MSP
-                - CORE_PEER_TLS_CLIENTROOTCAS_FILES=/var/hyperledger/users/Admin@org3.example.com/tls/ca.crt
-                - CORE_PEER_TLS_CLIENTCERT_FILE=/var/hyperledger/users/Admin@org3.example.com/tls/client.crt
-                - CORE_PEER_TLS_CLIENTKEY_FILE=/var/hyperledger/users/Admin@org3.example.com/tls/client.key
-            volumes:
-                - ../crypto-config/peerOrganizations/org3.example.com/peers/peer0.org3.example.com/msp:/var/hyperledger/msp
-                - ../crypto-config/peerOrganizations/org3.example.com/peers/peer0.org3.example.com/tls:/var/hyperledger/tls
-                - ../crypto-config/peerOrganizations/org3.example.com/users:/var/hyperledger/users
-                - ../channel-artifacts/:/var/hyperledger/configs
-            extra_hosts:
-              - "orderer.example.com:192.178.1.137"
-              # - "peer0.org1.example.com:192.178.0.109"
-              # - "peer0.org2.example.com:192.178.0.109"
-            networks:
-              fabric:
-                 aliases:
-                   - net
-            ports:
-              - 7051:7051
-              - 7053:7053
+    peer0.org3.example.com:
+      extends:
+          file: docker-compose-base.yml
+          service: peer
+      container_name: peer0.org3.example.com
+      environment:
+          - CORE_PEER_CHAINCODELISTENADDRESS=peer0.org3.example.com:9052
+          - CORE_PEER_ID=peer0.org3.example.com
+          - CORE_PEER_ADDRESS=peer0.org3.example.com:9051
+          - CORE_PEER_GOSSIP_BOOTSTRAP=peer0.org1.example.com:7051
+          - CORE_PEER_GOSSIP_ORGLEADER=false
+          - CORE_PEER_GOSSIP_USELEADERELECTION=true
+          - CORE_PEER_LOCALMSPID=Org3MSP
+          - CORE_PEER_TLS_CLIENTROOTCAS_FILES=/var/hyperledger/users/Admin@org3.example.com/tls/ca.crt
+          - CORE_PEER_TLS_CLIENTCERT_FILE=/var/hyperledger/users/Admin@org3.example.com/tls/client.crt
+          - CORE_PEER_TLS_CLIENTKEY_FILE=/var/hyperledger/users/Admin@org3.example.com/tls/client.key
+      volumes:
+          - ../crypto-config/peerOrganizations/org3.example.com/peers/peer0.org3.example.com/msp:/var/hyperledger/msp
+          - ../crypto-config/peerOrganizations/org3.example.com/peers/peer0.org3.example.com/tls:/var/hyperledger/tls
+          - ../crypto-config/peerOrganizations/org3.example.com/users:/var/hyperledger/users
+          - ../channel-artifacts/:/var/hyperledger/configs
+      extra_hosts:
+        - "orderer.example.com:192.178.1.137"
+        # - "peer0.org1.example.com:192.178.0.109"
+        # - "peer0.org2.example.com:192.178.0.109"
+      networks:
+        fabric:
+            aliases:
+              - net
+      ports:
+        - 9051:7051
+        - 9053:7053
 
     cli:
         container_name: cli
