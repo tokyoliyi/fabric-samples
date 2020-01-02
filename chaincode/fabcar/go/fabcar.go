@@ -33,6 +33,7 @@ import (
 	"encoding/json"
 	"fmt"
 	"strconv"
+	"time"
 
 	"github.com/hyperledger/fabric/core/chaincode/shim"
 	sc "github.com/hyperledger/fabric/protos/peer"
@@ -77,9 +78,81 @@ func (s *SmartContract) Invoke(APIstub shim.ChaincodeStubInterface) sc.Response 
 		return s.queryAllCars(APIstub)
 	} else if function == "changeCarOwner" {
 		return s.changeCarOwner(APIstub, args)
+	} else if function == "getHistoryForKey" {
+		return s.getHistoryForKey(APIstub, args)
+	} else if function == "createNewCar" {
+		return s.createnNewCar(APIstub, args)
 	}
 
 	return shim.Error("Invalid Smart Contract function name.")
+}
+
+func (s *SmartContract) createnNewCar(APIstub shim.ChaincodeStubInterface, args []string) sc.Response {
+
+	if len(args) != 5 {
+		return shim.Error("Incorrect number of arguments. Expecting 5")
+	}
+
+	var car = Car{Make: args[1], Model: args[2], Colour: args[3], Owner: args[4]}
+
+	carAsBytes, _ := json.Marshal(car)
+	APIstub.PutState(args[0], carAsBytes)
+
+	return shim.Success(nil)
+}
+
+func (s *SmartContract) getHistoryForKey(APIstub shim.ChaincodeStubInterface, args []string) sc.Response {
+	if len(args) != 1 {
+		return shim.Error("Incorrect number of arguments. Expecting 1")
+	}
+
+	var key = args[0]
+
+	historyIterator, _ := APIstub.GetHistoryForKey(key)
+	defer historyIterator.Close()
+
+	var buffer bytes.Buffer
+	buffer.WriteString("[")
+
+	bArrayMemberAlreadyWritten := false
+	for historyIterator.HasNext() {
+		queryResponse, err := historyIterator.Next()
+		if err != nil {
+			return shim.Error(err.Error())
+		}
+		if bArrayMemberAlreadyWritten == true {
+			buffer.WriteString(",")
+		}
+
+		t := time.Unix(queryResponse.Timestamp.Seconds, 0)
+		const layout = "Monday Jan 02 15:04:05 JST 2006"
+
+		buffer.WriteString("{\"TxID\":")
+		buffer.WriteString("\"")
+		buffer.WriteString(queryResponse.TxId)
+		buffer.WriteString("\"")
+
+		buffer.WriteString(", \"Record\":")
+		buffer.WriteString("\"")
+		buffer.WriteString(string(queryResponse.Value))
+		buffer.WriteString("\"")
+
+		buffer.WriteString(", \"Timestamp\":")
+		buffer.WriteString("\"")
+		buffer.WriteString(t.Format(layout))
+		buffer.WriteString("\"")
+
+		buffer.WriteString(", \"IsDelete\":")
+		buffer.WriteString("\"")
+		buffer.WriteString(strconv.FormatBool(queryResponse.IsDelete))
+		buffer.WriteString("\"")
+
+		buffer.WriteString("}")
+		bArrayMemberAlreadyWritten = true
+	}
+	buffer.WriteString("]")
+
+	return shim.Success(buffer.Bytes())
 }
 
 func (s *SmartContract) queryCar(APIstub shim.ChaincodeStubInterface, args []string) sc.Response {

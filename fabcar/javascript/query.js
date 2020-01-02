@@ -40,6 +40,9 @@ async function main() {
         // queryAllCars transaction - requires no arguments, ex: ('queryAllCars')
         const result = await contract.evaluateTransaction('queryAllCars');
         console.log(`Transaction has been evaluated, result is: ${result.toString()}`);
+        //変更後
+        const result1 = await contract.evaluateTransaction('getHistoryForKey',  process.argv[2]);
+        console.log(`Transaction has been evaluated, result is: ${result1.toString()}`);
 
     } catch (error) {
         console.error(`Failed to evaluate transaction: ${error}`);

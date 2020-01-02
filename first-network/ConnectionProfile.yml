@@ -26,7 +26,7 @@ organizations:
     certificateAuthorities:
       - ca.example.com
     adminPrivateKey:
-      path: crypto-config/peerOrganizations/org1.example.com/users/Admin@org1.example.com/msp/keystore/7adba194c3f83948a92db5aa2bd40650fdaf8036cc271f5a5f2ec402e50240b5_sk
+      path: crypto-config/peerOrganizations/org1.example.com/users/Admin@org1.example.com/msp/keystore/5a0bd5e788428fa5c0bfc6215d2e889ba7eba5e06ff8e57967864c1e5bec5a19_sk
     signedCert:
       path: crypto-config/peerOrganizations/org1.example.com/users/Admin@org1.example.com/msp/signcerts/Admin@org1.example.com-cert.pem
 orderers:

@@ -101,7 +101,8 @@ public class RegisterUser {
 		RegistrationRequest registrationRequest = new RegistrationRequest("user1");
 		registrationRequest.setAffiliation("org1.department1");
 		registrationRequest.setEnrollmentID("user1");
-		String enrollmentSecret = caClient.register(registrationRequest, admin);
+//		String enrollmentSecret = caClient.register(registrationRequest, admin);
+		String enrollmentSecret = "123456";
 		Enrollment enrollment = caClient.enroll("user1", enrollmentSecret);
 		Identity user = Identity.createIdentity("Org1MSP", enrollment.getCert(), enrollment.getKey());
 		wallet.put("user1", user);

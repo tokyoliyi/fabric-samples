@@ -15,6 +15,7 @@ services:
             - CORE_PEER_ID=peer0.org3.example.com
             - CORE_PEER_ADDRESS=peer0.org3.example.com:7051
             - CORE_PEER_GOSSIP_BOOTSTRAP=peer0.org1.example.com:7051
+            - CORE_PEER_GOSSIP_EXTERNALENDPOINT=peer0.org3.example.com:7051
             - CORE_PEER_GOSSIP_ORGLEADER=false
             - CORE_PEER_GOSSIP_USELEADERELECTION=true
             - CORE_PEER_LOCALMSPID=Org3MSP
@@ -27,9 +28,9 @@ services:
             - ../crypto-config/peerOrganizations/org3.example.com/users:/var/hyperledger/users
             - ../channel-artifacts/:/var/hyperledger/configs
         extra_hosts:
-            - "orderer.example.com:172.31.60.217"
-            - "peer0.org1.example.com:172.31.58.209"
-            - "peer0.org2.example.com:172.31.51.44"
+          - "orderer.example.com:192.178.1.137"
+          - "peer0.org2.example.com:192.178.1.235"
+          - "peer0.org1.example.com:192.178.0.119"
         networks:
           fabric:
              aliases:
@@ -52,7 +53,7 @@ services:
           - CORE_PEER_MSPCONFIGPATH=/opt/gopath/src/github.com/hyperledger/fabric/peer/crypto/peerOrganizations/org3.example.com/users/Admin@org3.example.com/msp
           - CORE_CHAINCODE_KEEPALIVE=10
         extra_hosts:
-          - "orderer.example.com:172.31.60.217"
+          - "orderer.example.com:192.178.1.137"
         working_dir: /opt/gopath/src/github.com/hyperledger/fabric/peer
         command: /bin/bash
         volumes:

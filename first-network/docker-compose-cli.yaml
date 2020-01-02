@@ -23,6 +23,11 @@ services:
       dockerfile: docker/combined/Dockerfile
     environment:
      - FABRIC_CA_CLIENT_URL=https://ca.org1.example.com:7054  
+    volumes:
+      # used to get ldif file into LDAP when adding new user
+      - ./ConnectionProfile.yml:/server/webApp/ConnectionProfile.yml
+      - ./channel-artifacts:/server/webApp/config
+      - ./crypto-config:/server/webApp/crypto-config
     networks:
     - byfn
     ports:
